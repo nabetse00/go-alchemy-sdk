@@ -26,7 +26,7 @@ type TransactionJson struct {
 	Value                string   `json:"value,omitempty"`
 }
 
-func (c *AlchemyClient) eth_getTransactionByHash(ths []TransactionByHashParam) (*AlchemyResponse[TransactionByHashResult], error) {
+func (c *AlchemyClient) Eth_getTransactionByHash(ths []TransactionByHashParam) (*AlchemyResponse[TransactionByHashResult], error) {
 	j := JsonParams[TransactionByHashParam]{
 		Id:      1,
 		Jsonrpc: "2.0",

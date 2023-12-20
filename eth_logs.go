@@ -24,7 +24,7 @@ type LogsResult struct {
 type LogsResults = []LogsResult
 
 //queries
-func (c *AlchemyClient) eth_getLogs(lp []LogsParam) (*AlchemyResponse[LogsResults], error) {
+func (c *AlchemyClient) Eth_getLogs(lp []LogsParam) (*AlchemyResponse[LogsResults], error) {
 	j := JsonParams[LogsParam]{
 		Id:      1,
 		Jsonrpc: "2.0",
