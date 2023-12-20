@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/avast/retry-go/v4"
-	// "github.com/golang/glog"
 
 	// "strings"
 	//"io/ioutil"
@@ -135,9 +134,10 @@ func executePost[P any, R any](client *AlchemyClient, jsonP JsonParams[P]) (*Alc
 					}
 				}
 				err = json.NewDecoder(resp.Body).Decode(&data)
-				// body2, _ := ioutil.ReadAll(resp.Body)
-				// glog.Infof("response body is: %#v\n", data)
-				// glog.Infof("error on decode is %s\n", err)
+				// warning ReadAll consumes resp.Body !
+				// read_body, _ := ioutil.ReadAll(resp.Body)
+				// fmt.Printf("response body is: %#v\n", data)
+				// fmt.Printf("error on decode is %s\n", err)
 				return data, err
 			}
 
@@ -145,7 +145,6 @@ func executePost[P any, R any](client *AlchemyClient, jsonP JsonParams[P]) (*Alc
 		},
 		retry.Attempts(client.MaxRetry),
 		retry.DelayType(func(n uint, err error, config *retry.Config) time.Duration {
-			// glog.Infof("[%d]Server fails with: %s\n", n, err.Error())
 			fmt.Printf("[%d]Server fails with: %s\n", n, err.Error())
 			if retriable, ok := err.(*RetriableError); ok {
 				fmt.Printf("Client follows server recommendation to retry after %v\n", retriable.RetryAfter)

@@ -2,19 +2,15 @@ package goalchemysdk
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"reflect"
 	// "strings"
 	"testing"
-
+	"time"
+	"fmt"
+	"github.com/joho/godotenv"
 	"net/http"
 	"net/http/httptest"
-
-	"time"
-
-	"github.com/golang/glog"
-	"github.com/joho/godotenv"
 )
 
 var (
@@ -25,7 +21,7 @@ var (
 func initEnvs() {
 	err := godotenv.Load()
 	if err != nil {
-		glog.Fatalln("Error loading .env file: %s", err)
+		panic(fmt.Sprintf("Error loading .env file: %s", err))
 	}
 	ALCHEMY_API_KEY_TEST = os.Getenv("ALCHEMY_API_KEY")
 	os.Setenv("APP_ENV", "test")
@@ -34,7 +30,7 @@ func initEnvs() {
 func initWrongKeyEnvs() {
 	err := godotenv.Load()
 	if err != nil {
-		glog.Fatalln("Error loading .env file: %s", err)
+		panic(fmt.Sprintf("Error loading .env file: %s", err))
 	}
 	ALCHEMY_API_KEY_TEST = "123456"
 	os.Setenv("APP_ENV", "test")
@@ -297,7 +293,7 @@ func TestAlchemyClient_executePost(t *testing.T) {
 				return
 			}
 			if !reflect.DeepEqual(*got, *tt.want) {
-				// glog.Infof("=====> %s -- %s \n", reflect.TypeOf(got.Jsonrpc), reflect.TypeOf(tt.want.Jsonrpc))
+				// fmt.Printf("=====> %s -- %s \n", reflect.TypeOf(got.Jsonrpc), reflect.TypeOf(tt.want.Jsonrpc))
 				t.Errorf("AlchemyClient.executePost() = %#v, want %#v", got, tt.want)
 			}
 		})
@@ -349,7 +345,7 @@ func TestAlchemyClient_executePost_wrongJson(t *testing.T) {
 				return
 			}
 			if !tt.wantErr && !reflect.DeepEqual(*got, *tt.want) {
-				// glog.Infof("=====> %s -- %s \n", reflect.TypeOf(got.Jsonrpc), reflect.TypeOf(tt.want.Jsonrpc))
+				// fmt.Printf("=====> %s -- %s \n", reflect.TypeOf(got.Jsonrpc), reflect.TypeOf(tt.want.Jsonrpc))
 				t.Errorf("AlchemyClient.executePost() = %#v, want %#v", got, tt.want)
 			}
 		})
@@ -595,7 +591,7 @@ func TestAlchemyClient_executePost_wrong_method(t *testing.T) {
 				return
 			}
 			if !reflect.DeepEqual(*got, *tt.want) {
-				glog.Infof("=====> %s -- %s \n", reflect.TypeOf(got.Jsonrpc), reflect.TypeOf(tt.want.Jsonrpc))
+				// fmt.Printf("=====> %s -- %s \n", reflect.TypeOf(got.Jsonrpc), reflect.TypeOf(tt.want.Jsonrpc))
 				t.Errorf("AlchemyClient.executePost() = %#v, want %#v", got, tt.want)
 			}
 		})
@@ -672,7 +668,7 @@ func TestAlchemyClient_executePost_wrong_url(t *testing.T) {
 				return
 			}
 			if !reflect.DeepEqual(*got, *tt.want) {
-				// glog.Infof("=====> %s -- %s \n", reflect.TypeOf(got.Jsonrpc), reflect.TypeOf(tt.want.Jsonrpc))
+				// fmt.Printf("=====> %s -- %s \n", reflect.TypeOf(got.Jsonrpc), reflect.TypeOf(tt.want.Jsonrpc))
 				t.Errorf("AlchemyClient.executePost() = %#v, want %#v", got, tt.want)
 			}
 		})
