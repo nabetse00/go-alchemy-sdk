@@ -24,6 +24,9 @@ func initEnvs() {
 		fmt.Printf("Error loading .env file: %s.\n Are env vars setup manualy?\n", err)
 	}
 	ALCHEMY_API_KEY_TEST = os.Getenv("ALCHEMY_API_KEY")
+	if (ALCHEMY_API_KEY_TEST == ""){
+		panic("Init env test: ALCHEMY_API_KEY_TEST empty")
+	}
 	os.Setenv("APP_ENV", "test")
 }
 
