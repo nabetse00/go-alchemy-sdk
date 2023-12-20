@@ -110,7 +110,7 @@ func TestAlchemyClient_eth_getTransactionByHash(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := tt.c.eth_getTransactionByHash(tt.args.ths)
+			got, err := tt.c.Eth_getTransactionByHash(tt.args.ths)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("AlchemyClient.eth_getTransactionByHash() error = %v, wantErr %v", err, tt.wantErr)
 				return

@@ -74,7 +74,7 @@ func TestAlchemyClient_eth_getLogs(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := tt.c.eth_getLogs(tt.args.lps)
+			got, err := tt.c.Eth_getLogs(tt.args.lps)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("AlchemyClient.eth_getLogs() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -143,7 +143,7 @@ func TestAlchemyClient_wrong_api_keys_eth_getLogs(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := tt.c.eth_getLogs(tt.args.lps)
+			got, err := tt.c.Eth_getLogs(tt.args.lps)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("AlchemyClient.eth_getLogs() error = %v, wantErr %v", err, tt.wantErr)
 				return
