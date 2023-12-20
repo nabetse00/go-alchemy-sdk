@@ -5,12 +5,12 @@ import (
 	"os"
 	"reflect"
 	// "strings"
-	"testing"
-	"time"
 	"fmt"
 	"github.com/joho/godotenv"
 	"net/http"
 	"net/http/httptest"
+	"testing"
+	"time"
 )
 
 var (
@@ -24,7 +24,7 @@ func initEnvs() {
 		fmt.Printf("Error loading .env file: %s.\n Are env vars setup manualy?\n", err)
 	}
 	ALCHEMY_API_KEY_TEST = os.Getenv("ALCHEMY_API_KEY")
-	if (ALCHEMY_API_KEY_TEST == ""){
+	if ALCHEMY_API_KEY_TEST == "" {
 		panic("Init env test: ALCHEMY_API_KEY_TEST empty")
 	}
 	os.Setenv("APP_ENV", "test")
@@ -522,7 +522,6 @@ func TestAlchemyClient_executePost_Retry_UnrecovarableAfter2(t *testing.T) {
 		})
 	}
 }
-
 
 func TestAlchemyClient_executePost_wrong_method(t *testing.T) {
 	initEnvs()
