@@ -103,6 +103,7 @@ func TestAlchemyClient_wrong_api_keys_eth_getLogs(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				BaseUrlApiV2: BASE_API_URL_V2,
 			},
 			args: args{
 				lps: nil,
@@ -121,6 +122,7 @@ func TestAlchemyClient_wrong_api_keys_eth_getLogs(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				BaseUrlApiV2: BASE_API_URL_V2,
 			},
 			args: args{
 				lps: []LogsParam{

@@ -45,7 +45,7 @@ func (c *AlchemyClient) Init(apiKey string, network Network, maxRetry uint, dela
 		return &AlchemyClientError{"Init", "Empty Alchemy key"}
 	}
 	if c.Network == "" {
-		return &AlchemyClientError{"Init", "EEmpty Alchemy Network"}
+		return &AlchemyClientError{"Init", "Empty Alchemy Network"}
 	}
 	if c.BaseUrlApiV2 == "" {
 		c.BaseUrlApiV2 = BASE_API_URL_V2
