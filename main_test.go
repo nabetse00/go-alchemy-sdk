@@ -21,7 +21,7 @@ var (
 func initEnvs() {
 	err := godotenv.Load()
 	if err != nil {
-		panic(fmt.Sprintf("Error loading .env file: %s", err))
+		fmt.Printf("Error loading .env file: %s.\n Are env vars setup manualy?\n", err)
 	}
 	ALCHEMY_API_KEY_TEST = os.Getenv("ALCHEMY_API_KEY")
 	os.Setenv("APP_ENV", "test")
@@ -30,7 +30,7 @@ func initEnvs() {
 func initWrongKeyEnvs() {
 	err := godotenv.Load()
 	if err != nil {
-		panic(fmt.Sprintf("Error loading .env file: %s", err))
+		fmt.Printf("Error loading .env file: %s.\n Are env vars setup manualy?\n", err)
 	}
 	ALCHEMY_API_KEY_TEST = "123456"
 	os.Setenv("APP_ENV", "test")
