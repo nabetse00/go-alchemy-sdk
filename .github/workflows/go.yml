@@ -15,7 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-
+    - name: Set up envs
+      env:
+        APP_ENV: "dev"
+        ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
     - name: Set up Go 1.21.x
       uses: actions/setup-go@v4
       with:
