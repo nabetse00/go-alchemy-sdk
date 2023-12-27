@@ -21,16 +21,15 @@ const (
 	ASTAR_MAINNET Network = "astar-mainnet"
 )
 
-type BlockFilter string
+type BlockTag string
 
 const (
-	PENDING   BlockFilter = "pending"   // - A sample next block built by the client on top of latest and containing the set of transactions usually taken from local mempool. Intuitively, you can think of these as blocks that have not been mined yet.
-	LATEST    BlockFilter = "latest"    // - The most recent block in the canonical chain observed by the client, this block may be re-orged out of the canonical chain even under healthy/normal conditions.
-	SAFE      BlockFilter = "safe"      // - The most recent crypto-economically secure block, cannot be re-orged outside of manual intervention driven by community coordination. Intuitively, this block is “unlikely” to be re-orged.
-	FInaliZED BlockFilter = "finalized" // - The most recent crypto-economically secure block, that has been accepted by >2/3 of validators. Cannot be re-orged outside of manual intervention driven by community coordination. Intuitively, this block is very unlikely to be re-orged.
-	EARLIEST  BlockFilter = "earliest"  // - The lowest numbered block the client has available. Intuitively, you can think of this as the first block created.
+	PENDING   BlockTag = "pending"   // - A sample next block built by the client on top of latest and containing the set of transactions usually taken from local mempool. Intuitively, you can think of these as blocks that have not been mined yet.
+	LATEST    BlockTag = "latest"    // - The most recent block in the canonical chain observed by the client, this block may be re-orged out of the canonical chain even under healthy/normal conditions.
+	SAFE      BlockTag = "safe"      // - The most recent crypto-economically secure block, cannot be re-orged outside of manual intervention driven by community coordination. Intuitively, this block is “unlikely” to be re-orged.
+	FINALIZED BlockTag = "finalized" // - The most recent crypto-economically secure block, that has been accepted by >2/3 of validators. Cannot be re-orged outside of manual intervention driven by community coordination. Intuitively, this block is very unlikely to be re-orged.
+	EARLIEST  BlockTag = "earliest"  // - The lowest numbered block the client has available. Intuitively, you can think of this as the first block created.
 )
-
 
 type JsonParams[P any] struct {
 	Id      uint   `json:"id"`
@@ -42,6 +41,10 @@ type JsonParams[P any] struct {
 type AlchemyApiError struct {
 	Code    int    `json:"code,omitempty"`
 	Message string `json:"message,omitempty"`
+}
+
+func (ae *AlchemyApiError) Error() string {
+	return fmt.Sprintf("Alchemy Api error code=%d, message=%s", ae.Code, ae.Message)
 }
 
 type AlchemyResponse[R any] struct {
@@ -82,7 +85,20 @@ var (
 		Code:    -32602,
 		Message: "too many arguments, want at most 1",
 	}
+	ErrorTooShortAddress = AlchemyApiError{
+		Code: -32602,
+		Message: "invalid 1st argument: address value was too short",
+	}
+	ErrorTooLongAddress = AlchemyApiError{
+		Code: -32602,
+		Message: "invalid 1st argument: address value was too long",
+	}
+	ErrorInvalidAddress = AlchemyApiError{
+		Code: -32602,
+		Message: "invalid 1st argument: address value was not valid hexadecimal",
+	}
 )
+
 // Alchemy Errors functions
 func ErrorWrongMethod(methodName string) AlchemyApiError {
 	return AlchemyApiError{

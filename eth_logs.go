@@ -3,11 +3,11 @@ package goalchemysdk
 // types
 
 type LogsParam struct {
-	BlockHash string      `json:"blockHash,omitempty"`
-	Address   string      `json:"address,omitempty"`
-	FromBlock BlockFilter `json:"fromBlock,omitempty"`
-	ToBlock   BlockFilter `json:"toBlock,omitempty"`
-	Topics    []string    `json:"topics,omitempty"`
+	BlockHash string   `json:"blockHash,omitempty"`
+	Address   string   `json:"address,omitempty"`
+	FromBlock BlockTag `json:"fromBlock,omitempty"`
+	ToBlock   BlockTag `json:"toBlock,omitempty"`
+	Topics    []string `json:"topics,omitempty"`
 }
 
 type LogsResult struct {
