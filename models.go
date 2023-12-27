@@ -43,9 +43,10 @@ type AlchemyApiError struct {
 	Message string `json:"message,omitempty"`
 }
 
-func (ae *AlchemyApiError) Error() string {
-	return fmt.Sprintf("Alchemy Api error code=%d, message=%s", ae.Code, ae.Message)
-}
+// custom error type
+// func (ae *AlchemyApiError) Error() string {
+// 	return fmt.Sprintf("Alchemy Api error code=%d, message=%s", ae.Code, ae.Message)
+// }
 
 type AlchemyResponse[R any] struct {
 	Id      uint            `json:"id"`
