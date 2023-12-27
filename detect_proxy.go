@@ -87,6 +87,7 @@ func readAddress(address string) (string, error) {
 // storage based detection
 func checkWithStorage(c *AlchemyClient, proxyAddress string, blockTag BlockTag, res chan ProxyResult, slot string) {
 	resp, err := c.Eth_getStorageAt(proxyAddress, slot, blockTag)
+	
 	if err != nil {
 		res <- ProxyResult{
 			address: "0x",
