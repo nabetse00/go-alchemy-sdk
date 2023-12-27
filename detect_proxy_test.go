@@ -31,6 +31,43 @@ func Test_parse1167Bytecode(t *testing.T) {
 			want:    "0x0000000010fd301be3200e67978e3cc67c962f48",
 			wantErr: false,
 		},
+		{
+			name: "Parse eip 1167 - wrong prefix",
+			args: args{
+				byteCode: "0xdeadbeef3d3d3d363d6f10fd301be3200e67978e3cc67c962f485af43d82803e903d91602757fd5bf3",
+				//        "0x363d3d373d3d3d363d6f10fd301be3200e67978e3cc67c962f485af43d82803e903d91602757fd5bf3"
+				//        "0x363d3d373d3d3d363d"
+			},
+			want:    "0x",
+			wantErr: true,
+		},
+		{
+			name: "Parse eip 1167 - wrong pushNN",
+			args: args{
+				byteCode: "0x363d3d373d3d3d363dXX10fd301be3200e67978e3cc67c962f485af43d82803e903d91602757fd5bf3",
+				//        "0x363d3d373d3d3d363dNN"
+			},
+			want:    "0x",
+			wantErr: true,
+		},
+		{
+			name: "Parse eip 1167 - wrong pushNN value",
+			args: args{
+				byteCode: "0x363d3d373d3d3d363d0010fd301be3200e67978e3cc67c962f485af43d82803e903d91602757fd5bf3",
+				//        "0x363d3d373d3d3d363dNN"                                                    "57fd5bf3"
+			},
+			want:    "0x",
+			wantErr: true,
+		},
+		{
+			name: "Parse eip 1167 - wrong suffix",
+			args: args{
+				byteCode: "0x363d3d373d3d3d363d6f10fd301be3200e67978e3cc67c962f485af43d82803e903d916027dead5bf3",
+				//        "0x363d3d373d3d3d363dNN"                                                    "57fd5bf3"
+			},
+			want:    "0x",
+			wantErr: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
