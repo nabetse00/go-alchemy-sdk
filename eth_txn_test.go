@@ -1,8 +1,10 @@
 package goalchemysdk
 
 import (
+	"net/http"
 	"reflect"
 	"testing"
+	"time"
 )
 
 
@@ -23,6 +25,9 @@ func TestAlchemyClient_eth_getTransactionByHash(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10,
+				},
 			},
 			args: args{
 				ths: nil,
@@ -41,6 +46,9 @@ func TestAlchemyClient_eth_getTransactionByHash(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10,
+				},
 			},
 			args: args{
 				ths: []string{"0x2d6da6ea7d7d7d1ca72576dc457a2b6f59fb798566fb97492b3f2835b0a59178"},
@@ -78,6 +86,9 @@ func TestAlchemyClient_eth_getTransactionByHash(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10,
+				},
 			},
 			args: args{
 				ths: []string{"0xdeada6ea7d7d7d1ca72576dc457a2b6f59fb798566fb97492b3f2835b0a59178", "0xbeefa6ea7d7d7d1ca72576dc457a2b6f59fb798566fb97492b3f2835b0a59178"},
@@ -95,6 +106,9 @@ func TestAlchemyClient_eth_getTransactionByHash(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10,
+				},
 			},
 			args: args{
 				ths: []string{"0xdeadbeef"},

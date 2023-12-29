@@ -1,8 +1,10 @@
 package goalchemysdk
 
 import (
+	"net/http"
 	"reflect"
 	"testing"
+	"time"
 )
 
 func TestAlchemyClient_Eth_getStorageAt(t *testing.T) {
@@ -24,6 +26,9 @@ func TestAlchemyClient_Eth_getStorageAt(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10,
+				},
 			},
 			args: args{
 				address:  "0x912CE59144191C1204E64559FE8253a0e49E6548",
@@ -42,6 +47,9 @@ func TestAlchemyClient_Eth_getStorageAt(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10,
+				},
 			},
 			args: args{
 				address:  "0xdeadbeef",
@@ -60,6 +68,9 @@ func TestAlchemyClient_Eth_getStorageAt(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10,
+				},
 			},
 			args: args{
 				address:  "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
@@ -78,6 +89,9 @@ func TestAlchemyClient_Eth_getStorageAt(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10,
+				},
 			},
 			args: args{
 				address:  "0xXaedbeefbeef067E90D5Cd1F8052B83562Ae670bA4A211a8",
@@ -96,6 +110,9 @@ func TestAlchemyClient_Eth_getStorageAt(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10,
+				},
 			},
 			args: args{
 				address:  "0xdeadbeedeadbeefdeadbeefdeadbeefdeadbeefd",

@@ -24,6 +24,7 @@ type AlchemyClient struct {
 	MaxRetry     uint
 	Delay        uint
 	BaseUrlApiV2 string
+	netClient  *http.Client
 }
 
 type AlchemyClientError struct {
@@ -35,7 +36,7 @@ func (e *AlchemyClientError) Error() string {
 	return fmt.Sprintf("Alchemy client error on method [%s] reason %s", e.method, e.message)
 }
 
-func (c *AlchemyClient) Init(apiKey string, network Network, maxRetry uint, delay uint, baseUrlApiV2 string) error {
+func (c *AlchemyClient) Init(apiKey string, network Network, maxRetry uint, delay uint, baseUrlApiV2 string, timeout time.Duration) error {
 	c.ApiKey = apiKey
 	c.Network = network
 	c.MaxRetry = maxRetry
@@ -56,6 +57,9 @@ func (c *AlchemyClient) Init(apiKey string, network Network, maxRetry uint, dela
 	if delay == 0 {
 		c.Delay = DELAY_DEFAULT
 	}
+	c.netClient = &http.Client{
+		Timeout: timeout,
+	  }
 	return nil
 }
 
@@ -93,7 +97,7 @@ func executePost[P any, R any](client *AlchemyClient, jsonP JsonParams[P]) (*Alc
 
 	data, err = retry.DoWithData(
 		func() (AlchemyResponse[R], error) {
-			resp, err = http.Post(
+			resp, err = client.netClient.Post(
 				url,
 				"application/json",
 				bytes.NewBuffer(body))

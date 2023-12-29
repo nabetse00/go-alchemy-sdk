@@ -1,9 +1,11 @@
 package goalchemysdk
 
 import (
+	"fmt"
+	"net/http"
 	"reflect"
 	"testing"
-	"fmt"
+	"time"
 )
 
 func TestAlchemyClient_eth_getLogs(t *testing.T) {
@@ -23,6 +25,9 @@ func TestAlchemyClient_eth_getLogs(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10,
+				},
 			},
 			args: args{
 				lps: nil,
@@ -41,6 +46,9 @@ func TestAlchemyClient_eth_getLogs(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10,
+				},
 			},
 			args: args{
 				lps: []LogsParam{
@@ -104,6 +112,9 @@ func TestAlchemyClient_wrong_api_keys_eth_getLogs(t *testing.T) {
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
 				BaseUrlApiV2: BASE_API_URL_V2,
+				netClient: &http.Client{
+					Timeout: time.Second *10,
+				},
 			},
 			args: args{
 				lps: nil,
@@ -123,6 +134,9 @@ func TestAlchemyClient_wrong_api_keys_eth_getLogs(t *testing.T) {
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
 				BaseUrlApiV2: BASE_API_URL_V2,
+				netClient: &http.Client{
+					Timeout: time.Second *10,
+				},
 			},
 			args: args{
 				lps: []LogsParam{

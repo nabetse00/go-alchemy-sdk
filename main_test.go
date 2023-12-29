@@ -230,6 +230,9 @@ func TestAlchemyClient_executePost(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10 ,
+				},
 			},
 			args: args{
 				j: JsonParams[LogsParam]{
@@ -252,6 +255,9 @@ func TestAlchemyClient_executePost(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10 ,
+				},
 			},
 			args: args{
 				j: JsonParams[LogsParam]{
@@ -322,6 +328,9 @@ func TestAlchemyClient_executePost_wrongJson(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10 ,
+				},
 			},
 			args: args{
 				j: JsonParams[interface{}]{
@@ -379,6 +388,9 @@ func TestAlchemyClient_executePost_Retry_Recoverable(t *testing.T) {
 				BaseUrlApiV2: ts.URL,
 				MaxRetry:     6,
 				Delay:        1,
+				netClient: &http.Client{
+					Timeout: time.Second *10 ,
+				},
 			},
 			args: args{
 				j: JsonParams[interface{}]{
@@ -435,6 +447,9 @@ func TestAlchemyClient_executePost_Retry_UnrecovarableAfter1(t *testing.T) {
 				BaseUrlApiV2: ts.URL,
 				MaxRetry:     6,
 				Delay:        1,
+				netClient: &http.Client{
+					Timeout: time.Second *10 ,
+				},
 			},
 			args: args{
 				j: JsonParams[interface{}]{
@@ -491,6 +506,9 @@ func TestAlchemyClient_executePost_Retry_UnrecovarableAfter2(t *testing.T) {
 				BaseUrlApiV2: ts.URL,
 				MaxRetry:     6,
 				Delay:        1,
+				netClient: &http.Client{
+					Timeout: time.Second *10 ,
+				},
 			},
 			args: args{
 				j: JsonParams[interface{}]{
@@ -540,6 +558,9 @@ func TestAlchemyClient_executePost_wrong_method(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10 ,
+				},
 			},
 			args: args{
 				j: JsonParams[LogsParam]{
@@ -562,6 +583,9 @@ func TestAlchemyClient_executePost_wrong_method(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10 ,
+				},
 			},
 			args: args{
 				j: JsonParams[LogsParam]{
@@ -618,6 +642,9 @@ func TestAlchemyClient_executePost_wrong_url(t *testing.T) {
 				ApiKey:       ALCHEMY_API_KEY_TEST,
 				Network:      ARB_MAINNET,
 				BaseUrlApiV2: "wrong" + BASE_API_URL_V2,
+				netClient: &http.Client{
+					Timeout: time.Second *10 ,
+				},
 			},
 			args: args{
 				j: JsonParams[LogsParam]{
@@ -639,6 +666,9 @@ func TestAlchemyClient_executePost_wrong_url(t *testing.T) {
 			c: &AlchemyClient{
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
+				netClient: &http.Client{
+					Timeout: time.Second *10 ,
+				},
 			},
 			args: args{
 				j: JsonParams[LogsParam]{
@@ -735,6 +765,9 @@ func TestAlchemyClient_Init(t *testing.T) {
 				MaxRetry:     MAX_RETRY_DEFAULT,
 				Delay:        DELAY_DEFAULT,
 				BaseUrlApiV2: BASE_API_URL_V2,
+				netClient: &http.Client{
+					Timeout: time.Second *10 ,
+				},
 			},
 			wantErr: false,
 		},
@@ -754,13 +787,16 @@ func TestAlchemyClient_Init(t *testing.T) {
 				MaxRetry:     10,
 				Delay:        2,
 				BaseUrlApiV2: "someurl.here.com",
+				netClient: &http.Client{
+					Timeout: time.Second *10 ,
+				},
 			},
 			wantErr: false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := tt.c.Init(tt.args.apiKey, tt.args.network, tt.args.maxRetry, tt.args.delay, tt.args.baseUrlApiV2); (err != nil) != tt.wantErr {
+			if err := tt.c.Init(tt.args.apiKey, tt.args.network, tt.args.maxRetry, tt.args.delay, tt.args.baseUrlApiV2, time.Second *10); (err != nil) != tt.wantErr {
 				t.Errorf("AlchemyClient.Init() error = %v, wantErr %v", err, tt.wantErr)
 			}
 			if !tt.wantErr && !reflect.DeepEqual(tt.wants, tt.c) {
