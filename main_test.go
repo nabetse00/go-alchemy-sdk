@@ -2,15 +2,15 @@ package goalchemysdk
 
 import (
 	"encoding/json"
-	"os"
-	"reflect"
-	// "strings"
 	"fmt"
-	"github.com/joho/godotenv"
 	"net/http"
 	"net/http/httptest"
+	"os"
+	"reflect"
 	"testing"
 	"time"
+
+	"github.com/joho/godotenv"
 )
 
 var (
@@ -231,7 +231,7 @@ func TestAlchemyClient_executePost(t *testing.T) {
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
 				netClient: &http.Client{
-					Timeout: time.Second *10 ,
+					Timeout: time.Second * 10,
 				},
 			},
 			args: args{
@@ -256,7 +256,7 @@ func TestAlchemyClient_executePost(t *testing.T) {
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
 				netClient: &http.Client{
-					Timeout: time.Second *10 ,
+					Timeout: time.Second * 10,
 				},
 			},
 			args: args{
@@ -329,7 +329,7 @@ func TestAlchemyClient_executePost_wrongJson(t *testing.T) {
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
 				netClient: &http.Client{
-					Timeout: time.Second *10 ,
+					Timeout: time.Second * 10,
 				},
 			},
 			args: args{
@@ -389,7 +389,7 @@ func TestAlchemyClient_executePost_Retry_Recoverable(t *testing.T) {
 				MaxRetry:     6,
 				Delay:        1,
 				netClient: &http.Client{
-					Timeout: time.Second *10 ,
+					Timeout: time.Second * 10,
 				},
 			},
 			args: args{
@@ -448,7 +448,7 @@ func TestAlchemyClient_executePost_Retry_UnrecovarableAfter1(t *testing.T) {
 				MaxRetry:     6,
 				Delay:        1,
 				netClient: &http.Client{
-					Timeout: time.Second *10 ,
+					Timeout: time.Second * 10,
 				},
 			},
 			args: args{
@@ -507,7 +507,7 @@ func TestAlchemyClient_executePost_Retry_UnrecovarableAfter2(t *testing.T) {
 				MaxRetry:     6,
 				Delay:        1,
 				netClient: &http.Client{
-					Timeout: time.Second *10 ,
+					Timeout: time.Second * 10,
 				},
 			},
 			args: args{
@@ -559,7 +559,7 @@ func TestAlchemyClient_executePost_wrong_method(t *testing.T) {
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
 				netClient: &http.Client{
-					Timeout: time.Second *10 ,
+					Timeout: time.Second * 10,
 				},
 			},
 			args: args{
@@ -584,7 +584,7 @@ func TestAlchemyClient_executePost_wrong_method(t *testing.T) {
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
 				netClient: &http.Client{
-					Timeout: time.Second *10 ,
+					Timeout: time.Second * 10,
 				},
 			},
 			args: args{
@@ -643,7 +643,7 @@ func TestAlchemyClient_executePost_wrong_url(t *testing.T) {
 				Network:      ARB_MAINNET,
 				BaseUrlApiV2: "wrong" + BASE_API_URL_V2,
 				netClient: &http.Client{
-					Timeout: time.Second *10 ,
+					Timeout: time.Second * 10,
 				},
 			},
 			args: args{
@@ -667,7 +667,7 @@ func TestAlchemyClient_executePost_wrong_url(t *testing.T) {
 				ApiKey:  ALCHEMY_API_KEY_TEST,
 				Network: ARB_MAINNET,
 				netClient: &http.Client{
-					Timeout: time.Second *10 ,
+					Timeout: time.Second * 10,
 				},
 			},
 			args: args{
@@ -766,7 +766,7 @@ func TestAlchemyClient_Init(t *testing.T) {
 				Delay:        DELAY_DEFAULT,
 				BaseUrlApiV2: BASE_API_URL_V2,
 				netClient: &http.Client{
-					Timeout: time.Second *10 ,
+					Timeout: time.Second * 10,
 				},
 			},
 			wantErr: false,
@@ -788,7 +788,7 @@ func TestAlchemyClient_Init(t *testing.T) {
 				Delay:        2,
 				BaseUrlApiV2: "someurl.here.com",
 				netClient: &http.Client{
-					Timeout: time.Second *10 ,
+					Timeout: time.Second * 10,
 				},
 			},
 			wantErr: false,
@@ -796,7 +796,7 @@ func TestAlchemyClient_Init(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := tt.c.Init(tt.args.apiKey, tt.args.network, tt.args.maxRetry, tt.args.delay, tt.args.baseUrlApiV2, time.Second *10); (err != nil) != tt.wantErr {
+			if err := tt.c.Init(tt.args.apiKey, tt.args.network, tt.args.maxRetry, tt.args.delay, tt.args.baseUrlApiV2, time.Second*10); (err != nil) != tt.wantErr {
 				t.Errorf("AlchemyClient.Init() error = %v, wantErr %v", err, tt.wantErr)
 			}
 			if !tt.wantErr && !reflect.DeepEqual(tt.wants, tt.c) {
@@ -823,6 +823,32 @@ func TestAlchemyClientError_Error(t *testing.T) {
 			if got := tt.e.Error(); got != tt.want {
 				t.Errorf("AlchemyClientError.Error() = %v, want %v", got, tt.want)
 			}
+		})
+	}
+}
+
+func TestAlchemyClient_Close(t *testing.T) {
+	tests := []struct {
+		name string
+		c    *AlchemyClient
+	}{
+		{
+			name: "test client close",
+			c: &AlchemyClient{
+				ApiKey:       ALCHEMY_API_KEY_TEST,
+				Network:      ARB_MAINNET,
+				MaxRetry:     10,
+				Delay:        2,
+				BaseUrlApiV2: "someurl.here.com",
+				netClient: &http.Client{
+					Timeout: time.Second * 10,
+				},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tt.c.Close()
 		})
 	}
 }

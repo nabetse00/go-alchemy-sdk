@@ -162,4 +162,7 @@ func executePost[P any, R any](client *AlchemyClient, jsonP JsonParams[P]) (*Alc
 	return &data, err
 }
 
+func (c *AlchemyClient) Close() {
+	c.netClient.CloseIdleConnections()
+}
 
