@@ -2,7 +2,9 @@ package goalchemysdk
 
 import (
 	"errors"
+	"net/http"
 	"testing"
+	"time"
 )
 
 func Test_parse1167Bytecode(t *testing.T) {
@@ -104,6 +106,9 @@ func TestDetectProxyTarget(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ETH_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0xdead3fd06D57D140f6ad8C2913DbE87fdecDd5F",
 				blockTag:     LATEST,
@@ -118,6 +123,9 @@ func TestDetectProxyTarget(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ETH_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0xa81043fd06D57D140f6ad8C2913DbE87fdecDd5F",
 				blockTag:     LATEST,
@@ -132,6 +140,9 @@ func TestDetectProxyTarget(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ETH_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0xA7AeFeaD2F25972D80516628417ac46b3F2604Af",
 				blockTag:     LATEST,
@@ -146,6 +157,9 @@ func TestDetectProxyTarget(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ETH_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0xDd4e2eb37268B047f55fC5cAf22837F9EC08A881",
 				blockTag:     LATEST,
@@ -160,6 +174,9 @@ func TestDetectProxyTarget(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ETH_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0x114f1388fAB456c4bA31B1850b244Eedcd024136",
 				blockTag:     LATEST,
@@ -174,6 +191,9 @@ func TestDetectProxyTarget(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ETH_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0x8260b9eC6d472a34AD081297794d7Cc00181360a",
 				blockTag:     LATEST,
@@ -188,6 +208,9 @@ func TestDetectProxyTarget(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ETH_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0x8260b9eC6d472a34AD081297794d7Cc00181360a",
 				blockTag:     LATEST,
@@ -202,6 +225,9 @@ func TestDetectProxyTarget(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ETH_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0x6d5d9b6ec51c15f45bfa4c460502403351d5b999",
 				blockTag:     LATEST,
@@ -216,6 +242,9 @@ func TestDetectProxyTarget(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ETH_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0xa81043fd06D57D140f6ad8C2913DbE87fdecDd5F",
 				blockTag:     LATEST,
@@ -230,6 +259,9 @@ func TestDetectProxyTarget(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ETH_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0x0DA0C3e52C977Ed3cBc641fF02DD271c3ED55aFe",
 				blockTag:     LATEST,
@@ -244,6 +276,9 @@ func TestDetectProxyTarget(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ETH_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B",
 				blockTag:     LATEST,
@@ -258,6 +293,9 @@ func TestDetectProxyTarget(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ARB_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0x912ce59144191c1204e64559fe8253a0e49e6548",
 				blockTag:     LATEST,
@@ -272,6 +310,9 @@ func TestDetectProxyTarget(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ARB_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0xfBDf75866904767dE1Caa8B64eb18a7562517F5A",
 				blockTag:     LATEST,
@@ -286,6 +327,9 @@ func TestDetectProxyTarget(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ARB_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0x4Fa610DD115e790B8768A482Fc366803534e9Adc",
 				blockTag:     LATEST,
@@ -329,6 +373,9 @@ func Test_checkWithStorage(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  "wrong",
 					MaxRetry: 3,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0x4Fa610DD115e790B8768A482Fc366803534e9Adc",
 				res:          make(chan ProxyResult),
@@ -377,6 +424,9 @@ func Test_checkEIP1167(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  "wrong",
 					MaxRetry: 3,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress: "0x4Fa610DD115e790B8768A482Fc366803534e9Adc",
 				res:          make(chan ProxyResult),
@@ -425,6 +475,9 @@ func Test_checkEIP1967Beacon(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  "wrong",
 					MaxRetry: 3,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress:  "0x4Fa610DD115e790B8768A482Fc366803534e9Adc",
 				res:           make(chan ProxyResult),
@@ -443,6 +496,9 @@ func Test_checkEIP1967Beacon(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ETH_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress:  "0x114f1388fAB456c4bA31B1850b244Eedcd024136",
 				res:           make(chan ProxyResult),
@@ -461,6 +517,9 @@ func Test_checkEIP1967Beacon(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ETH_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress:  "0x114f1388fAB456c4bA31B1850b244Eedcd024136",
 				res:           make(chan ProxyResult),
@@ -480,6 +539,9 @@ func Test_checkEIP1967Beacon(t *testing.T) {
 					ApiKey:   ALCHEMY_API_KEY_TEST,
 					Network:  ETH_MAINNET,
 					MaxRetry: 10,
+					netClient: &http.Client{
+						Timeout: time.Second *10 ,
+					},
 				},
 				proxyAddress:  "0x114f1388fAB456c4bA31B1850b244Eedcd024136",
 				res:           make(chan ProxyResult),
