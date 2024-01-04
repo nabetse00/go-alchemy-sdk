@@ -7,6 +7,7 @@ import (
 
 type Network string
 
+// avaiable networks
 const (
 	ETH_MAINNET   Network = "eth-mainnet"
 	ETH_GOERLI    Network = "eth-goerli"
@@ -31,6 +32,7 @@ const (
 	EARLIEST  BlockTag = "earliest"  // - The lowest numbered block the client has available. Intuitively, you can think of this as the first block created.
 )
 
+// base json params type
 type JsonParams[P any] struct {
 	Id      uint   `json:"id"`
 	Jsonrpc string `json:"jsonrpc"`
@@ -51,7 +53,7 @@ func (ae *AlchemyApiError) Error() string {
 type AlchemyResponse[R any] struct {
 	Id      uint            `json:"id"`
 	Jsonrpc string          `json:"jsonrpc"`
-	Result  R               `json:"result,omitempty"` // []map[string]any `json:"result"`
+	Result  R               `json:"result,omitempty"`
 	Error   AlchemyApiError `json:"error,omitempty"`
 }
 
@@ -100,7 +102,7 @@ var (
 	}
 )
 
-// Alchemy Errors functions
+// generate Alchemy Error givem a method name
 func ErrorWrongMethod(methodName string) AlchemyApiError {
 	return AlchemyApiError{
 		Code:    -32600,

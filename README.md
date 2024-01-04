@@ -1,5 +1,8 @@
 # Alchemy SDK for Go
 
+> [!WARNING]  
+> This is a early alpha and meant for my personal use. Not for production.
+
 Welcome to the Alchemy SDK for Go! This software development kit (SDK) provides a convenient way to interact with the Alchemy API using the Go programming language. Alchemy is a powerful platform that offers various services, including blockchain data indexing, analytics, and more.
 
 ![coverage](https://raw.githubusercontent.com/nabetse00/go-alchemy-sdk/badges/.badges/main/coverage.svg)

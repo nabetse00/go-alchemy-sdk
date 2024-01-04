@@ -23,7 +23,7 @@ type AlchemyClient struct {
 	Network      Network
 	MaxRetry     uint
 	Delay        uint
-	BaseUrlApiV2 string
+	BaseUrlApiV2 string // base url if empty deafault is used
 	netClient  *http.Client
 }
 
@@ -36,6 +36,8 @@ func (e *AlchemyClientError) Error() string {
 	return fmt.Sprintf("Alchemy client error on method [%s] reason %s", e.method, e.message)
 }
 
+
+// Initialiises a client
 func (c *AlchemyClient) Init(apiKey string, network Network, maxRetry uint, delay uint, baseUrlApiV2 string, timeout time.Duration) error {
 	c.ApiKey = apiKey
 	c.Network = network
@@ -112,7 +114,6 @@ func executePost[P any, R any](client *AlchemyClient, jsonP JsonParams[P]) (*Alc
 				if resp.StatusCode != http.StatusOK {
 					err = fmt.Errorf("HTTP %d for: %s", resp.StatusCode, string(body))
 					if resp.StatusCode == http.StatusTooManyRequests {
-						// fmt.Printf("inside too many %s -- %s \n", resp.Header.Get("Retry-After"), resp.Header.Get("retryAfter"))
 						// check Retry-After header if it contains seconds to wait for the next retry
 						if retryAfter, e := strconv.ParseInt(resp.Header.Get("Retry-After"), 10, 32); e == nil {
 							// the server returns 0 to inform that the operation cannot be retried
@@ -138,10 +139,6 @@ func executePost[P any, R any](client *AlchemyClient, jsonP JsonParams[P]) (*Alc
 					}
 				}
 				err = json.NewDecoder(resp.Body).Decode(&data)
-				// warning ReadAll consumes resp.Body !
-				// read_body, _ := ioutil.ReadAll(resp.Body)
-				// fmt.Printf("response body is: %#v\n", data)
-				// fmt.Printf("error on decode is %s\n", err)
 				return data, err
 			}
 
